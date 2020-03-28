@@ -2,32 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
-        google()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.71"
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
-    }
-}
 
 android {
     compileSdkVersion 29
