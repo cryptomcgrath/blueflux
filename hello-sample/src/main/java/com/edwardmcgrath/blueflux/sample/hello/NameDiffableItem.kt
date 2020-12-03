@@ -1,6 +1,5 @@
 package com.edwardmcgrath.blueflux.sample.hello
 
-import com.edwardmcgrath.blueflux.core.adapter.DiffableItem
 
 internal class NameDiffableItem(private val key: Int, val name: String) : DiffableItem {
 
