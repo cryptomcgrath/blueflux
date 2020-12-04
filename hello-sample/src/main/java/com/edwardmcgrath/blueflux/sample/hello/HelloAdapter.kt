@@ -1,5 +1,6 @@
 package com.edwardmcgrath.blueflux.sample.hello
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 
-internal class HelloAdapter(private val store: RxStore<HelloState>): RecyclerView.Adapter<HelloAdapter.NameItemViewHolder>() {
+internal class HelloAdapter(
+        private val context: Context,
+        private val store: RxStore<HelloState>): RecyclerView.Adapter<HelloAdapter.NameItemViewHolder>() {
+
     private val itemModels: List<DiffableItem>
         get() = differ.currentList
 
@@ -36,10 +40,15 @@ internal class HelloAdapter(private val store: RxStore<HelloState>): RecyclerVie
 
     private fun buildList(state: HelloState): List<DiffableItem> {
         return state.list.mapIndexed { idx, it ->
-            NameDiffableItem(
-                    key = idx,
-                    name = it
-            )
+                NameDiffableItem(
+                        key = idx,
+                        name = it
+                )
+        }.ifEmpty {
+            listOf(NameDiffableItem(
+                    key = 1,
+                    name = context.getString(R.string.empty_list_message)
+            ))
         }
     }
 

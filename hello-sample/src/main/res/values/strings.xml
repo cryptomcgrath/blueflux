@@ -3,5 +3,6 @@
     <string name="app_name">Blueflux Core Hello Sample</string>
     <string name="hello_title">Blueflux Hello Sample</string>
     <string name="button_add">Add</string>
-    <string name="add_dialog_title">Enter a name</string>
+    <string name="add_dialog_title">Enter something:</string>
+    <string name="empty_list_message">Your list is empty</string>
 </resources>

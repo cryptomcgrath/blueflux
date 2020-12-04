@@ -16,6 +16,10 @@ internal class HelloViewModel : ViewModel() {
     // changes as defined in the reducer function
     private val dispatcher = Dispatcher.create(store)
 
+    init {
+        dispatcher.post(HelloEvent.Init)
+    }
+
     fun addItem(name: String) = dispatcher.post(HelloEvent.AddItemToList(name))
 }
 
@@ -24,6 +28,7 @@ internal data class HelloState(
 ): State
 
 internal sealed class HelloEvent : Event {
+    object Init : HelloEvent()
     class AddItemToList(val item: String) : HelloEvent()
 }
 
@@ -37,6 +42,10 @@ private  val helloReducerFun: ReducerFun<HelloState> = { inState, event ->
                         add(event.item)
                     }
             )
+        }
+
+        HelloEvent.Init -> {
+            HelloState()
         }
 
         else -> state

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 internal class HelloActivity : ComponentActivity() {
-    val viewModel: HelloViewModel by this.viewModels()
+    private val viewModel: HelloViewModel by this.viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +23,10 @@ internal class HelloActivity : ComponentActivity() {
         }
 
         // the adapter will listen for state changes and update itself
-        findViewById<RecyclerView>(R.id.recycler_view).adapter = HelloAdapter(viewModel.store)
+        findViewById<RecyclerView>(R.id.recycler_view).adapter =
+                HelloAdapter(
+                        context = this,
+                        store = viewModel.store)
     }
 
     // shows a dialog that allows the user to enter some text
@@ -34,7 +37,7 @@ internal class HelloActivity : ComponentActivity() {
         val dialog = AlertDialog.Builder(this)
                 .setView(edittext)
                 .setPositiveButton(R.string.button_add) { _, _ ->
-                    if (edittext.text.toString().isNotEmpty() == true) {
+                    if (edittext.text.toString().isNotEmpty()) {
                         // tell the view model to add the new item
                         viewModel.addItem(edittext.text.toString())
                     }
