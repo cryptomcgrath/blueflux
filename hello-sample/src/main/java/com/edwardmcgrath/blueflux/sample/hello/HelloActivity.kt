@@ -7,7 +7,6 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import testHumidity
 
 internal class HelloActivity : ComponentActivity() {
     private val viewModel: HelloViewModel by this.viewModels()
@@ -28,8 +27,6 @@ internal class HelloActivity : ComponentActivity() {
                 HelloAdapter(
                         context = this,
                         store = viewModel.store)
-
-        testHumidity()
     }
 
     // shows a dialog that allows the user to enter some text
