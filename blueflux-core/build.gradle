@@ -3,14 +3,11 @@ apply plugin: 'kotlin-android'
 
 
 android {
-    compileSdkVersion 33
+    compileSdk 35
     namespace 'com.edwardmcgrath.blueflux.core'
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 33
-        versionCode 102
-        versionName "1.02"
+        minSdk 24
         consumerProguardFiles 'consumer-rules.pro'
     }
 

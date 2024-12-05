@@ -1,5 +1,7 @@
 include ':blueflux-core'
 include ':hello-sample'
+include ':blueflux-flow'
 
 project(":blueflux-core").projectDir = new File(rootDir, "./blueflux-core")
 project(":hello-sample").projectDir = new File(rootDir, "./hello-sample")
+project(":blueflux-flow").projectDir = new File(rootDir, "./blueflux-flow")

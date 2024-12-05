@@ -4,14 +4,13 @@ apply plugin: 'kotlin-android'
 
 
 android {
-    compileSdkVersion 33
+    compileSdk 35
     namespace 'com.edwardmcgrath.blueflux.sample.hello'
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 33
-        versionCode 102
-        versionName "1.02"
+        minSdk 24
+        versionCode 103
+        versionName "1.03"
     }
 
     buildTypes {
@@ -36,8 +35,8 @@ android {
 }
 
 dependencies {
-    //implementation project(":blueflux-core")
-    implementation 'com.github.cryptomcgrath:blueflux:master-SNAPSHOT'
+    implementation project(":blueflux-core")
+    //implementation 'com.github.cryptomcgrath:blueflux:master-SNAPSHOT'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20"
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.core:core-ktx:1.10.1'
