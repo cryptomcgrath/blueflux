@@ -5,37 +5,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.edwardmcgrath.blueflux.core.RxStore
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
+import com.edwardmcgrath.blueflux.flow.Store
+import kotlinx.coroutines.launch
 
 internal class HelloAdapter(
         private val context: Context,
-        private val store: RxStore<HelloState>): RecyclerView.Adapter<HelloAdapter.NameItemViewHolder>() {
+        private val lifecycleOwner: LifecycleOwner,
+        private val store: Store<HelloState>
+): RecyclerView.Adapter<HelloAdapter.NameItemViewHolder>() {
 
     private val itemModels: List<DiffableItem>
         get() = differ.currentList
 
     private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
-    private val disposables = CompositeDisposable()
-
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
 
-        // subscribe and react to state changes
-        store.stateStream.subscribeBy(
-                onNext = {
-                    differ.submitList(buildList(it))
-                },
-                onError = {
-                    // ignore
-                }
-        ).addTo(disposables)
+        lifecycleOwner.lifecycleScope.launch {
+            // subscribe and react to state changes
+            store.stateStream.collect {
+                differ.submitList(buildList(it))
+            }
+        }
     }
 
     private fun buildList(state: HelloState): List<DiffableItem> {
@@ -53,7 +50,6 @@ internal class HelloAdapter(
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        disposables.clear()
         super.onDetachedFromRecyclerView(recyclerView)
     }
 

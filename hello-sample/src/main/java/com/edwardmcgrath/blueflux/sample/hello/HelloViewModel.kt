@@ -1,16 +1,16 @@
 package com.edwardmcgrath.blueflux.sample.hello
 
 import androidx.lifecycle.ViewModel
-import com.edwardmcgrath.blueflux.core.Dispatcher
-import com.edwardmcgrath.blueflux.core.Event
-import com.edwardmcgrath.blueflux.core.ReducerFun
-import com.edwardmcgrath.blueflux.core.RxStore
-import com.edwardmcgrath.blueflux.core.State
+import com.edwardmcgrath.blueflux.flow.Dispatcher
+import com.edwardmcgrath.blueflux.flow.Event
+import com.edwardmcgrath.blueflux.flow.ReducerFun
+import com.edwardmcgrath.blueflux.flow.State
+import com.edwardmcgrath.blueflux.flow.Store
 
 internal class HelloViewModel : ViewModel() {
     // the store holds our immutable state and all state changes are performed by the store
     // via its reducer function
-    val store = RxStore.create(helloReducerFun)
+    val store: Store<HelloState> = Store.create(helloReducerFun)
 
     // the store listens to events that are posted to the dispatcher and makes state
     // changes as defined in the reducer function

@@ -26,7 +26,9 @@ internal class HelloActivity : ComponentActivity() {
         findViewById<RecyclerView>(R.id.recycler_view).adapter =
                 HelloAdapter(
                         context = this,
+                        lifecycleOwner = this,
                         store = viewModel.store)
+
     }
 
     // shows a dialog that allows the user to enter some text
